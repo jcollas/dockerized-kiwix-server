@@ -13,7 +13,7 @@ Here are some smaller ones for testing:
 
 ## Step 2: Move the ZIM files to the 'zim' directory
 
-```
+```shell
 # inside the folder where you downloaded the ZIMs (e.g. ~/Downloads)
 $ mkdir -p ./dockerized-kiwix-server/zims
 $ cp *.zim ./dockerized-kiwix-server/zims
@@ -23,7 +23,7 @@ $ cp *.zim ./dockerized-kiwix-server/zims
 
 This will create the Linux machine, download the Kiwix tools (including `kiwix-serve`), copy the ZIMfiles over, then create the Kiwix library XML file.
 
-```
+```shell
 $ pwd # -> ./dockerized-kiwix-server
 $ docker build -t kiwix-serve .
 ```
@@ -31,15 +31,15 @@ $ docker build -t kiwix-serve .
 ## Step 4: Run the container
 
 This starts the container and the Kiwix server, and makes it available on your machine at `http://localhost:8080`.
-```
-$ docker run -p 8080:8080 kiwix-serve
+
+```shell
+$ docker run -d --name kiwix-serve -p 8080:8080 kiwix-serve
 ```
 
 To turn it off:
 
-```
-$ docker ps # -> find the container id
-$ docker stop <container id>
+```shell
+$ docker stop $(docker ps -qf "name=kiwix-serve")
 ```
 
 ## Step 5: Try it out in the browser
