@@ -2,7 +2,9 @@
 
 # Get most recent version of 'kiwix-tools' from its channel's feed.xml
 wget https://download.kiwix.org/release/kiwix-tools/feed.xml
-TAR_FILE="$(grep -oP '(?<=<title>)kiwix-tools_linux-x86_64.*(?=</title>)' feed.xml | head -1 )"
+ARCH=`arch`
+FILE_NAME="(?<=<title>)kiwix-tools_linux-$ARCH.*(?=</title>)"
+TAR_FILE="$(grep -oP $FILE_NAME feed.xml | head -1 )"
 
 # Install latest version of kiwix-tools
 wget -O "${TAR_FILE}" https://download.kiwix.org/release/kiwix-tools/"${TAR_FILE}"
